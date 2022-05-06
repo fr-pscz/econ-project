@@ -8,11 +8,15 @@
 ## Data
 - WTI spot price FOB (free on board)
   - **Start:** 02 Jan 1986
-  - **End:** 05 May 2022
+  - **End:** 02 May 2022
   - [Source](https://www.eia.gov/dnav/pet/hist/RWTCD.htm)
+- Brent spot price FOB (free on board)
+  - **Start:** 20 May 1987
+  - **End:** 02 May 2022
+  - [Source](https://www.eia.gov/dnav/pet/hist/RBRTED.htm)
 - Henry hub natural gas spot
   - **Start:** 07 Jan 1996
-  - **End:** 05 May 2022
+  - **End:** 02 May 2022
   - [Source](https://www.eia.gov/dnav/ng/hist/rngwhhdD.htm)
 
 ## References
