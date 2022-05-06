@@ -1,6 +1,12 @@
 # Cointegration between ?? and ??
 ### Project: Econometrics
 
+## Data
+- WTI Spot Price FOB
+https://www.eia.gov/dnav/pet/hist/RWTCD.htm
+
+- Henry Hub Natural Gas Spot Price
+https://www.eia.gov/dnav/ng/hist/rngwhhdD.htm
 
 ## References
 
