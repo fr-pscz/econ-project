@@ -5,7 +5,7 @@
 
 [McKinsey Energy Insights](https://www.mckinseyenergyinsights.com/resources/refinery-reference-desk/fob/)
 
-## Data
+## Data: Energy prices
 - WTI spot price FOB (free on board)
   - **Start:** 02 Jan 1986
   - **End:** 02 May 2022
@@ -18,6 +18,16 @@
   - **Start:** 07 Jan 1996
   - **End:** 02 May 2022
   - [Source](https://www.eia.gov/dnav/ng/hist/rngwhhdD.htm)
+
+## Data: Currencies
+- Dollar Broad Index (old)
+  - **Start:** 02 Jan 1996
+  - **End:** 31 Dec 2019
+  - [Source](https://fred.stlouisfed.org/series/DTWEXB)
+- Dollar Broad Index (new)
+  - **Start:** 02 Jan 2006
+  - **End:** 29 Apr 2022
+  - [Source](https://fred.stlouisfed.org/series/DTWEXBGS)
 
 ## References
 
