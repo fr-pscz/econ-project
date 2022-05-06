@@ -1,9 +1,10 @@
 # Cointegration between crude oil and natural gas
 ### Project: Econometrics
 
-## Help
+## Tips
 
-[McKinsey Energy Insights](https://www.mckinseyenergyinsights.com/resources/refinery-reference-desk/fob/)
+- For terminology: [McKinsey Energy Insights](https://www.mckinseyenergyinsights.com/resources/refinery-reference-desk/fob/)
+- `co_ng_FX.pdf` uses log-prices.
 
 ## Data: Energy prices
 - WTI spot price FOB (free on board)
