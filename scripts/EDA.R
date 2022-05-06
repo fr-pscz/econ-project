@@ -21,5 +21,7 @@ p <- ggplot(WTI, aes(x=date, y=USD)) +
   geom_line(data = WTI, color="#8c2303") + 
   geom_line(data = BRENT, color="#0c07a8") +
   geom_line(data = HENRY, color="#06a11e") +
-  xlab("")
+  xlab("") +
+  scale_y_continuous(name = "USD/bbl",
+    sec.axis = sec_axis(~./plotC, name="USD/Btu"))
 show(p)
