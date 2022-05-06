@@ -1,5 +1,9 @@
-# Cointegration between ?? and ??
+# Cointegration between crude oil and natural gas
 ### Project: Econometrics
+
+## Help
+
+[McKinsey Energy Insights](https://www.mckinseyenergyinsights.com/resources/refinery-reference-desk/fob/)
 
 ## Data
 - [WTI Spot Price FOB](https://www.eia.gov/dnav/pet/hist/RWTCD.htm)
