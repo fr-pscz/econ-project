@@ -6,7 +6,10 @@
 [McKinsey Energy Insights](https://www.mckinseyenergyinsights.com/resources/refinery-reference-desk/fob/)
 
 ## Data
-- [WTI Spot Price FOB](https://www.eia.gov/dnav/pet/hist/RWTCD.htm)
+- WTI spot price FOB (free on board)
+  - **Start:** 02 Jan 1986
+  - **End:** 05 May 2022
+  - [Source](https://www.eia.gov/dnav/pet/hist/RWTCD.htm)
 
 - [Henry Hub Natural Gas Spot Price](https://www.eia.gov/dnav/ng/hist/rngwhhdD.htm)
 
