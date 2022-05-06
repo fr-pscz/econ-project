@@ -11,17 +11,16 @@ BRENT$date <- as.Date(BRENT$date, "%m/%d/%Y")
 HENRY <- read.csv("../data/NG.csv", header = F)
 names(HENRY) <- c("date", "USD")
 HENRY$date <- as.Date(HENRY$date, "%m/%d/%Y")
-plotC <- 20
-HENRY$Btu <- HENRY$USD
-HENRY$USD <- HENRY$Btu * plotC
+plotC <- 15
 
 library(ggplot2)
 
 p <- ggplot(WTI, aes(x=date, y=USD)) +
   geom_line(data = WTI, color="#8c2303") + 
   geom_line(data = BRENT, color="#0c07a8") +
-  geom_line(data = HENRY, color="#06a11e") +
+  geom_line(data = HENRY, mapping = aes(y=USD*plotC), color="#06a11e") +
   xlab("") +
   scale_y_continuous(name = "USD/bbl",
-    sec.axis = sec_axis(~./plotC, name="USD/Btu"))
+    sec.axis = sec_axis(~./plotC, name="USD/Btu")) +
+  theme_minimal()
 show(p)
