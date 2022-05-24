@@ -22,15 +22,18 @@ df <- merge(BRENT,HENRY)
 
 if (monthly) {
   df <- turn_to_monthly(df)
-  df <- df[df$date < as.Date("2009-01-01"),]
+  #df <- df[df$date < as.Date("2007-01-01"),]
+  df <- df[df$date < as.Date("2008-04-16"),]
 }
 
 df$logBRENT <- log(df$BRENT)
 df$logHENRY <- log(df$HENRY)
 
 p <- ggplot(df, aes(x=date)) +
-  geom_line(mapping = aes(y=logHENRY), color="#06a11e") +
-  geom_line(mapping = aes(y=logBRENT), color="#0c07a8") +
-  geom_line(mapping = aes(y=logBRENT-logHENRY), color="#ff0000") +
-  theme_minimal()
+  geom_line(mapping = aes(y=logHENRY - mean(logHENRY),color="HENRY")) +
+  geom_line(mapping = aes(y=logBRENT - mean(logBRENT),color="BRENT")) +
+  ylab("Price") + xlab("") + theme_minimal() +
+  scale_colour_manual("", 
+                      breaks = c("HENRY", "BRENT"),
+                      values = c("#06a11e", "#0c07a8"))
 show(p)

@@ -13,9 +13,9 @@ show(kpss.test(df$logBRENT))
 show(adf.test(residuals(lm(logHENRY ~ logBRENT, data=df))))
 
 # Johansen
-show(summary(ca.jo(df[,c("logBRENT", "logHENRY")], type = "trace", K=6)))
+show(summary(ca.jo(df[,c("logBRENT", "logHENRY")], type = "trace", K=6, spec="transitory")))
 
 # Engle-Granger
-#show(coint.test(df[,"logBRENT"],df[,"logHENRY"],d=0,nlag = 6, output = T))
+show(coint.test(df[,"logBRENT"],df[,"logHENRY"],d=0,nlag = 6, output = T))
 
            
