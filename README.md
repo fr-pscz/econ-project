@@ -1,6 +1,16 @@
 # Cointegration between crude oil and natural gas
 ### Project: Econometrics
 
+## To do:
+
+- probability distributions and autocorrelation functions (both price and first differences)
+- ADF constant and constant + trend
+- bivariate VAR (?? they're I(1))
+- lag length (they choose VAR(2))
+- residuals diagnostics
+- Chow tests
+- VECM
+
 ## Tips
 
 - For terminology: [McKinsey Energy Insights](https://www.mckinseyenergyinsights.com/resources/refinery-reference-desk/fob/)
