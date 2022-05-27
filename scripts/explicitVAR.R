@@ -1,16 +1,16 @@
-VAR.HENRY <- logHENRY ~ logHENRY.l1 + logBRENT.l1
-VAR.BRENT <- logBRENT ~ logHENRY.l1 + logBRENT.l1
-datachow <- df[2:nrow(df),c("logHENRY","logBRENT")]
-datachow$logHENRY.l1 <- df[1:(nrow(df)-1),c("logHENRY")]
-datachow$logBRENT.l1 <- df[1:(nrow(df)-1),c("logBRENT")]
+VAR.NATGAS <- logNATGAS ~ logNATGAS.l1 + logOIL.l1
+VAR.OIL <- logOIL ~ logNATGAS.l1 + logOIL.l1
+datachow <- df[2:nrow(df),c("logNATGAS","logOIL")]
+datachow$logNATGAS.l1 <- df[1:(nrow(df)-1),c("logNATGAS")]
+datachow$logOIL.l1 <- df[1:(nrow(df)-1),c("logOIL")]
 
-VAR.HENRY <- logHENRY ~ logHENRY.l1 + logBRENT.l1 + logHENRY.l2 + logBRENT.l2
-VAR.BRENT <- logBRENT ~ logHENRY.l1 + logBRENT.l1 + logHENRY.l2 + logBRENT.l2 + COVID
-datachow <- df[3:nrow(df),c("logHENRY","logBRENT","date")]
-datachow$logHENRY.l1 <- df[2:(nrow(df)-1),c("logHENRY")]
-datachow$logBRENT.l1 <- df[2:(nrow(df)-1),c("logBRENT")]
-datachow$logHENRY.l2 <- df[1:(nrow(df)-2),c("logHENRY")]
-datachow$logBRENT.l2 <- df[1:(nrow(df)-2),c("logBRENT")]
+VAR.NATGAS <- logNATGAS ~ logNATGAS.l1 + logOIL.l1 + logNATGAS.l2 + logOIL.l2
+VAR.OIL <- logOIL ~ logNATGAS.l1 + logOIL.l1 + logNATGAS.l2 + logOIL.l2 + COVID
+datachow <- df[3:nrow(df),c("logNATGAS","logOIL","date")]
+datachow$logNATGAS.l1 <- df[2:(nrow(df)-1),c("logNATGAS")]
+datachow$logOIL.l1 <- df[2:(nrow(df)-1),c("logOIL")]
+datachow$logNATGAS.l2 <- df[1:(nrow(df)-2),c("logNATGAS")]
+datachow$logOIL.l2 <- df[1:(nrow(df)-2),c("logOIL")]
 datachow$trend       <- 1:(nrow(df)-2)
 datachow$COVID       <- numeric(nrow(datachow))
 

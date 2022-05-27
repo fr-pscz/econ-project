@@ -1,39 +1,42 @@
-library(ggplot2)
-rm(list=ls())
-
-monthly <- T
+message("============")
+message("0. LOAD DATA")
+message("============")
 
 source("helper_functions.R")
 
-WTI <- read.csv("../data/WTI.csv", header = F)
-names(WTI) <- c("date", "WTI")
-WTI$date <- as.Date(WTI$date, "%m/%d/%Y")
+OIL <- read.csv("../data/WTI.csv", header = F)
+names(OIL) <- c("date", "OIL")
+OIL$date <- as.Date(OIL$date, "%m/%d/%Y")
 
-BRENT <- read.csv("../data/BRENT.csv", header = F)
-names(BRENT) <- c("date", "BRENT")
-BRENT$date <- as.Date(BRENT$date, "%m/%d/%Y")
-
-HENRY <- read.csv("../data/NG.csv", header = F)
-names(HENRY) <- c("date", "HENRY")
-HENRY$date <- as.Date(HENRY$date, "%m/%d/%Y")
+NATGAS <- read.csv("../data/NG.csv", header = F)
+names(NATGAS) <- c("date", "NATGAS")
+NATGAS$date <- as.Date(NATGAS$date, "%m/%d/%Y")
 plotC <- 15
 
-df <- merge(BRENT,HENRY)
+df <- merge(OIL,NATGAS)
 
 if (monthly) {
   df <- turn_to_monthly(df)
-  #df <- df[df$date < as.Date("2007-01-01"),]
-  df <- df[df$date < as.Date("2008-04-16"),]
 }
 
-df$logBRENT <- log(df$BRENT)
-df$logHENRY <- log(df$HENRY)
+df <- df[df$date <= as.Date(end_day),]
+df <- df[df$date >= as.Date(start_day),]
+
+df$logOIL <- log(df$OIL)
+df$logNATGAS <- log(df$NATGAS)
 
 p <- ggplot(df, aes(x=date)) +
-  geom_line(mapping = aes(y=logHENRY - mean(logHENRY),color="HENRY")) +
-  geom_line(mapping = aes(y=logBRENT - mean(logBRENT),color="BRENT")) +
-  ylab("Price") + xlab("") + theme_minimal() +
-  scale_colour_manual("", 
-                      breaks = c("HENRY", "BRENT"),
-                      values = c("#06a11e", "#0c07a8"))
+  geom_line(mapping = aes(y=logNATGAS - mean(logNATGAS),color="NATGAS")) +
+  geom_line(mapping = aes(y=logOIL - mean(logOIL),color="OIL")) +
+  ylab("Log-price") + xlab("") + theme_minimal() +
+  scale_colour_manual("", breaks = c("NATGAS", "OIL"), values = c(gasColor, oilColor)) +
+  ggtitle("Comparison of log-prices", subtitle = "(prices are mean-adjusted to account for different magnitude)")
 show(p)
+
+if (monthly) {
+  cat("Loaded monthly data from", as.character(df[1,"date"]), "to", as.character(df[nrow(df),"date"]))
+} else {
+  cat("Loaded daily data from", as.character(df[1,"date"]), "to", as.character(df[nrow(df),"date"])) 
+}
+message("")
+message("")
