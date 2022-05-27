@@ -1,0 +1,93 @@
+============
+0. LOAD DATA
+============
+Loaded monthly data from 2008-06-01 to 2022-05-01
+
+================
+1. COINTEGRATION
+================
+Testing whether series are stationary
+-------------------------------------
+>>> ADF :: p-values
+>>>      | H0 : non-stationary
+>>>      | H1 : stationary
+ log-NATGAS   log-OIL   
+   0.5752      0.5405   
+
+>>> KPSS :: p-values
+>>>      | H0 : stationary
+>>>      | H1 : non-stationary
+ log-NATGAS   log-OIL   
+    0.01        0.01    
+(p-values smaller than 1% are printed as 1%)
+
+Testing residuals of regression for cointegration
+-------------------------------------------------
+>>> ADF :: p-values
+>>>      | H0 : non-stationary
+>>>      | H1 : stationary
+log-NATGAS ~ log-OIL
+       0.09431
+
+Direct tests of cointegration
+-----------------------------
+>>> Johansen Trace Procedure :: output
+>>>    | r : number of cointegrating relationships
+     H0        T-stat       10%          5%          1%     
+   r <= 1      4.051        6.5         8.18       11.65    
+   r == 0      15.29       15.66       17.95       23.52    
+
+>>> Engle-Granger :: p-values
+>>>      | H0 : not cointegrated
+>>>      | H1 : cointegratedd
+  no trend     linear    quadratic  
+    0.01        0.1         0.1     
+(p-values larger than 10% are printed as 10%)
+
+================
+2. MODEL FITTING
+================
+Vector autoregressive model
+---------------------------
+>>> logNATGAS model
+               Estimate Std. Error   t value     Pr(>|t|)
+logNATGAS.l1  0.8188351 0.03848280 21.277951 4.877688e-49
+logOIL.l1     0.1038642 0.03754305  2.766537 6.316164e-03
+const        -0.2205241 0.13464530 -1.637815 1.033775e-01
+
+>>> logOIL model
+                 Estimate Std. Error    t value     Pr(>|t|)
+logNATGAS.l1 -0.008924392 0.03345925 -0.2667242 7.900166e-01
+logOIL.l1     0.941822976 0.03264218 28.8529475 3.755873e-66
+const         0.253454774 0.11706869  2.1650091 3.183249e-02
+
+Vector error correction model
+-----------------------------
+>>> Daily change in logNATGAS model
+                 Estimate Std. Error    t value     Pr(>|t|)
+ect1           0.13846763 0.03420770  4.0478492 7.989790e-05
+constant      -0.39342306 0.09708934 -4.0521759 7.856835e-05
+logOIL.dl1    -0.04211705 0.09376260 -0.4491882 6.538962e-01
+logNATGAS.dl1 -0.05510226 0.07607247 -0.7243390 4.699024e-01
+
+>>> Daily change in logOIL model
+                 Estimate Std. Error    t value     Pr(>|t|)
+ect1          -0.05126466 0.02828969 -1.8121322 7.181757e-02
+constant       0.14368446 0.08029265  1.7895096 7.540089e-02
+logOIL.dl1     0.35494513 0.07754144  4.5774895 9.325704e-06
+logNATGAS.dl1 -0.03243558 0.06291175 -0.5155728 6.068557e-01
+
+Improvement of VECM over VAR
+----------------------------
+>>> Mean absolute error in first differences
+  MAE(VAR)   MAE(VECM)    Gain(%)   
+   0.1084     0.08596      -20.73   
+
+====================
+3. STRUCTURAL CHANGE
+====================
+Date of first structural break
+------------------------------
+>>> Breakpoint Chow test :: first break
+   NATGAS       OIL     
+ 2020-04-01  2009-03-01
