@@ -11,13 +11,9 @@ OIL$date <- as.Date(OIL$date, "%m/%d/%Y")
 NATGAS <- read.csv("../data/NG.csv", header = F)
 names(NATGAS) <- c("date", "NATGAS")
 NATGAS$date <- as.Date(NATGAS$date, "%m/%d/%Y")
-plotC <- 15
 
 df <- merge(OIL,NATGAS)
-
-if (monthly) {
-  df <- turn_to_monthly(df)
-}
+df <- turn_to_monthly(df)
 
 df <- df[df$date <= as.Date(end_day),]
 df <- df[df$date >= as.Date(start_day),]
@@ -33,10 +29,7 @@ p <- ggplot(df, aes(x=date)) +
   ggtitle("Comparison of log-prices", subtitle = "(prices are mean-adjusted to account for different magnitude)")
 show(p)
 
-if (monthly) {
-  cat("Loaded monthly data from", as.character(df[1,"date"]), "to", as.character(df[nrow(df),"date"]))
-} else {
-  cat("Loaded daily data from", as.character(df[1,"date"]), "to", as.character(df[nrow(df),"date"])) 
-}
+
+cat("Loaded monthly data from", as.character(df[1,"date"]), "to", as.character(df[nrow(df),"date"]))
 message("")
 message("")

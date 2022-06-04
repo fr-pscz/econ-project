@@ -63,14 +63,14 @@ const        -0.034936155 0.05863741 -0.5957998 5.523140e-01
 
 Vector error correction model
 -----------------------------
->>> Daily change in logNATGAS model
+>>> Monthly change in logNATGAS model
                  Estimate Std. Error     t value     Pr(>|t|)
 ect1           0.15369999 0.04250453  3.61608486 0.0004244271
 constant      -0.27307266 0.07957137 -3.43179546 0.0008010568
 logOIL.dl1    -0.00306533 0.15698245 -0.01952658 0.9844505191
 logNATGAS.dl1  0.09549667 0.08621607  1.10764359 0.2700300408
 
->>> Daily change in logOIL model
+>>> Monthly change in logOIL model
                   Estimate Std. Error    t value  Pr(>|t|)
 ect1           0.010570209 0.02450160  0.4314090 0.6668748
 constant      -0.007955737 0.04586865 -0.1734461 0.8625665

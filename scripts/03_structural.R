@@ -2,10 +2,11 @@ message("====================")
 message("3. STRUCTURAL CHANGE")
 message("====================")
 
+# contains formulas for the one-step Chow test
 source("explicitVAR.R")
 
 
-# OIL 
+# OIL ----
 OIL.F <- numeric(nrow(df)-13)
 OIL.P <- numeric(nrow(df)-13)
 idx   <- 0
@@ -13,11 +14,8 @@ s     <- 11
 
 tmp.m <- lm(VAR.OIL,data=datachow[1:s,])
 tmp.RSS1 <- sum((tmp.m$residuals)^2)
-
 for (s in 12:nrow(df)) {
   idx <- idx + 1
-  #tmp.m <- VAR(df[1:s,c("logNATGAS", "logOIL")], p=1, type = "const")
-  #tmp.RSS <- sum((tmp.m$varresult$logOIL$residuals)^2)
   tmp.m <- lm(VAR.OIL,data=datachow[1:s,])
   tmp.RSS <- sum((tmp.m$residuals)^2)
   OIL.F[idx] <- ((tmp.RSS - tmp.RSS1)*(s - 3 - 1)/tmp.RSS1)/qf(0.99,1,s-3-1)
@@ -25,28 +23,24 @@ for (s in 12:nrow(df)) {
   tmp.RSS1 <- tmp.RSS
 }
 
-# NATGAS
+# NATGAS ----
 NATGAS.F <- numeric(nrow(df)-13)
 NATGAS.P <- numeric(nrow(df)-13)
 idx <- 0
 s <- 11
 
-#tmp.m <- VAR(df[1:s,c("logNATGAS", "logOIL")], p=1, type = "const")
 tmp.m <- lm(VAR.NATGAS,data=datachow[1:s,])
 tmp.RSS1 <- sum((tmp.m$residuals)^2)
-
 for (s in 12:nrow(df)) {
   idx <- idx + 1
   tmp.m <- lm(VAR.NATGAS,data=datachow[1:s,])
-  #tmp.m <- VAR(df[1:s,c("logNATGAS", "logOIL")], p=1, type = "const")
-  #tmp.RSS <- sum((tmp.m$varresult$logNATGAS$residuals)^2)
   tmp.RSS <- sum((tmp.m$residuals)^2)
   NATGAS.F[idx] <- ((tmp.RSS - tmp.RSS1)*(s - 3 - 1)/tmp.RSS1)/qf(0.99,1,s-3-1)
   NATGAS.P[idx] <- pf(NATGAS.F[idx],1,s-3-1,lower.tail = F)
   tmp.RSS1 <- tmp.RSS
 }
 
-
+# Plots ----
 p <- ggplot(df[12:nrow(df),], aes(x=date)) +
   geom_line(mapping = aes(y=NATGAS.F,color="NATGAS")) +
   geom_line(mapping = aes(y=OIL.F,color="OIL")) +
@@ -54,10 +48,6 @@ p <- ggplot(df[12:nrow(df),], aes(x=date)) +
   ggtitle("1-step Chow test", subtitle = "horizontal line at 1% significance") +
   scale_colour_manual("", breaks = c("NATGAS", "OIL"), values = c(gasColor, oilColor))
 show(p)
-
-
-#sctest(VAR.NATGAS,type="Rec-CUSUM",data=datachow)
-#sctest(VAR.NATGAS,type="Chow",data=datachow)
 
 n <- nrow(datachow) - 7
 

@@ -9,7 +9,6 @@ library(aTSA)
 library(tseries)
 library(strucchange)
 
-monthly <- T
 start_day <- "1900-01-01"
 end_day   <- "2022-12-31"
 
